@@ -73,7 +73,8 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    regex:  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                 },
                 valid: false,
                 touched: false
@@ -131,6 +132,11 @@ class ContactData extends Component {
         if(rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
         }
+        
+        if(rules.regex) {
+            isValid = rules.regex.test(value.toLowerCase()) && isValid;
+        }
+
 
         return isValid;
     }
